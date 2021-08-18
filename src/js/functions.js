@@ -177,7 +177,7 @@ const whichSelected = () => {
         case 5:
           // Regra 3/8 de Simpson
           // ------------------------
-          // result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: methodHere()}
+          // result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: simpson38RuleMethod()}
           break;
 
         case 6:
