@@ -136,3 +136,56 @@ const getInput = () => ({
   b: Number(document.querySelector("#b").value),
   epsilon: Number(document.querySelector("#epsilon").value),
 });
+
+/**
+ * Função encaminha a chamada dos métodos conforme a seleção do Usuário.
+ * @returns { Object } Object with the results of the integrals obtained by the methods.
+ */
+const WhichSelected = () => {
+  const result = {};
+  const onlySelects = [...document.querySelectorAll(".toggle-control input")]
+    .map((el) => el.checked && Number(el.value))
+    .filter(Boolean);
+
+  onlySelects.length != 0 &&
+    onlySelects.forEach((el) => {
+      switch (el) {
+        case 1:
+          // Retângulos à esquerda
+          // ------------------------
+          // result.leftRectangles = methodHere()
+          break;
+
+        case 2:
+          // Retângulos à direita
+          // ------------------------
+          // result.rightRectangles = methodHere()
+          break;
+
+        case 3:
+          // Regra dos Trapézios
+          // ------------------------
+          // result.trapezoids = methodHere()
+          break;
+
+        case 4:
+          // Regra 1/3 de Simpson
+          // ------------------------
+          // result.simpson13 = methodHere()
+          break;
+
+        case 5:
+          // Regra 3/8 de Simpson
+          // ------------------------
+          // result.simpson38 = methodHere()
+          break;
+
+        case 6:
+          // Quadratura de Gauss
+          // ------------------------
+          // result.quadrature = methodHere();
+          break;
+      }
+    });
+  return result;
+};
