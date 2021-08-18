@@ -1,5 +1,4 @@
 function leftRectangleRuleMethod(f, a, b, error) {
-  func = new Function(`x`, `return ${f};`);
   let n = 10;
   let sum = 0;
   let q;
@@ -7,7 +6,7 @@ function leftRectangleRuleMethod(f, a, b, error) {
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
-    sum += f(x);
+    sum += mathFunction(f, x);
   }
   sum *= h;
   do {
@@ -17,7 +16,7 @@ function leftRectangleRuleMethod(f, a, b, error) {
     sum = 0;
     for (let i = 0; i < n; i++) {
       x = a + i * h;
-      sum += f(x);
+      sum += mathFunction(f, x);
     }
     sum *= h;
   } while (Math.abs(sum - q) > error);
@@ -25,7 +24,6 @@ function leftRectangleRuleMethod(f, a, b, error) {
 }
 
 function rightRectangleRuleMethod(f, a, b, error) {
-  func = new Function(`x`, `return ${f};`);
   let n = 10;
   let sum = 0;
   let q;
@@ -33,7 +31,7 @@ function rightRectangleRuleMethod(f, a, b, error) {
   let h = (b - a) / n;
   for (let i = 1; i <= n; i++) {
     x = a + i * h;
-    sum += f(x);
+    sum += mathFunction(f, x);
   }
   sum *= h;
   do {
@@ -43,7 +41,7 @@ function rightRectangleRuleMethod(f, a, b, error) {
     sum = 0;
     for (let i = 1; i <= n; i++) {
       x = a + i * h;
-      sum += f(x);
+      sum += mathFunction(f, x);
     }
     sum *= h;
   } while (Math.abs(sum - q) > error);
@@ -51,27 +49,25 @@ function rightRectangleRuleMethod(f, a, b, error) {
 }
 
 function trapezoidolRuleMethod(f, a, b, error) {
-  func = new Function(`x`, `return ${f};`);
   let n = 10;
-  let p = (f(a) + f(b)) / 2, q;
+  let p = (mathFunction(f, a) + mathFunction(f, b)) / 2,
+    q;
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
-    p += f(x);
+    p += mathFunction(f, x);
   }
   p *= h;
   do {
     q = p;
     n *= 2;
     h = (b - a) / n;
-    p = (f(a) + f(b)) / 2;
+    p = (mathFunction(f, a) + mathFunction(f, b)) / 2;
     for (let i = 0; i < n; i++) {
       x = a + i * h;
-      p += f(x);
+      p += mathFunction(f, x);
     }
     p *= h;
   } while (Math.abs(p - q) > error);
   return p;
 }
-
-
