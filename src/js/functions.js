@@ -126,6 +126,10 @@ const genChart = (info) => {
   new Chart(chartCanvas, config);
 };
 
+/**
+ * Function that captures user input data.
+ * @return { object } Object with input data.
+ */
 const getInput = () => ({
   func: document.querySelector("#function").value,
   a: Number(document.querySelector("#a").value),
