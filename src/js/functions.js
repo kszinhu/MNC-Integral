@@ -51,7 +51,7 @@ const mathFunction = (input, x) => {
  * Function to clear all point inputs of the points table.
  */
 const clearInputs = () => {
-  [...document.querySelectorAll("table input")].map((el) => (el.value = ""));
+  [...document.querySelectorAll("input")].map((el) => (el.value = ""));
 };
 
 /**
