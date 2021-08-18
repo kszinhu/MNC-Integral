@@ -48,21 +48,21 @@ function rightRectangleRuleMethod({ func, a, b, epsilon }) {
 
 function trapezoidolRuleMethod({ func, a, b, epsilon }) {
   let n = 10;
-  let p = (mathFunction(func, a)[0] + mathFunction(func, [b])[0]) / 2, q;
+  let p = (mathFunction(func, [a])[0] + mathFunction(func, [b])[0]) / 2, q;
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
-    p += mathFunction(func, x)[0];
+    p += mathFunction(func, [x])[0];
   }
   p *= h;
   do {
     q = p;
     n *= 2;
     h = (b - a) / n;
-    p = (mathFunction(func, a)[0] + mathFunction(func, [b])[0]) / 2;
+    p = (mathFunction(func, [a])[0] + mathFunction(func, [b])[0]) / 2;
     for (let i = 0; i < n; i++) {
       x = a + i * h;
-      p += mathFunction(func, x)[0];
+      p += mathFunction(func, [x])[0];
     }
     p *= h;
   } while (Math.abs(p - q) > epsilon);
