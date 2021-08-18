@@ -172,37 +172,37 @@ const whichSelected = () => {
         case 1:
           // Retângulos à esquerda
           // ------------------------
-          // result.leftRectangles = {methodName: 'Retângulos à esquerda', value: leftRectangleRuleMethod()}
+          result.leftRectangles = {methodName: 'Retângulos à esquerda', value: leftRectangleRuleMethod(getInput())}
           break;
 
         case 2:
           // Retângulos à direita
           // ------------------------
-          // result.rightRectangles = {methodName: 'Retângulos à direita', value: rightRectangleRuleMethod()}
+          result.rightRectangles = {methodName: 'Retângulos à direita', value: rightRectangleRuleMethod(getInput())}
           break;
 
         case 3:
           // Regra dos Trapézios
           // ------------------------
-          // result.trapezoids = {methodName: 'Regra dos Trapézios', value: trapezoidolRuleMethod()}
+          result.trapezoids = {methodName: 'Regra dos Trapézios', value: trapezoidolRuleMethod(getInput())}
           break;
 
         case 4:
           // Regra 1/3 de Simpson
           // ------------------------
-          // result.simpson13 = {methodName: 'Regra 1/3 de Simpson', value: simpson13RuleMethod()}
+          result.simpson13 = {methodName: 'Regra 1/3 de Simpson', value: simpson13RuleMethod(getInput())}
           break;
 
         case 5:
           // Regra 3/8 de Simpson
           // ------------------------
-          // result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: simpson38RuleMethod()}
+          result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: simpson38RuleMethod(getInput())}
           break;
 
         case 6:
           // Quadratura de Gauss
           // ------------------------
-          // result.quadrature = {methodName: 'Quadratura de Gauss', value: GaussQuadratureMethod()}
+          result.quadrature = {methodName: 'Quadratura de Gauss', value: GaussQuadratureMethod(getInput())}
           break;
       }
     });
