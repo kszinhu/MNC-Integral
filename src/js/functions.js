@@ -125,3 +125,10 @@ const genChart = (info) => {
 
   new Chart(chartCanvas, config);
 };
+
+const getInput = () => ({
+  func: document.querySelector("#function").value,
+  a: Number(document.querySelector("#a").value),
+  b: Number(document.querySelector("#b").value),
+  epsilon: Number(document.querySelector("#epsilon").value),
+});
