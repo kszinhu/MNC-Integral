@@ -1,7 +1,7 @@
 /**
  * Function to create popup for the information button.
  */
-const infoButton = () => {
+const infoButton = (input) => {
   const body = document.querySelector("body");
   const elem = document.createElement("details");
   body.appendChild(elem);
@@ -39,21 +39,37 @@ const infoButton = () => {
 };
 
 /**
- * Function that calculates a mathematical function.
- * @param { Input } string mathematics.
- * @param { x } array of x points.
+ * returns the mathematical expression formatted using Regex.
+ *
+ * @param {input} string of the unformatted mathematical expression.
+ * @return {output} string of the formatted mathematical expression.
  */
-const mathFunction = (input, x) => {
-  return Array.isArray(x)
-    ? x.map((el) => math.evaluate(input, { x: el }))
-    : math.evaluate(input, { x });
-};
+function formattingExpression(input) {
+  return input
+    .toLowerCase()
+    .replace(/sen|sin/gi, "sin")
+    .replace(/cos/gi, "cos")
+    .replace(/tg|tan/gi, "tan")
+    .replace(/\^/gi, "**")
+    .replace(/pi/gi, "Math.PI")
+    .replace(/\log\D/gi, "log10(")
+    .replace(/\ln/gi, "log")
+    .replace(/\e/gi, "Math.E");
+}
+
+/**
+ * Function that calculates a mathematical function.s
+ */
+function createMathFunction(...args) {
+  const func = args.shift();
+  return new Function(...args, `return ${func};`);
+}
 
 /**
  * Function to clear all point inputs of the points table.
  */
 const clearInputs = () => {
-  [...document.querySelectorAll("input")].map((el) => (el.value = ""));
+  [...document.querySelectorAll(".input-menu input")].map((el) => (el.value = ""));
 };
 
 /**
@@ -152,7 +168,7 @@ const genChart = ({ func, a, b }) => {
  * @return { object } Object with input data.
  */
 const getInput = () => ({
-  func: document.querySelector("#function").value.toLowerCase(),
+  func: formattingExpression(document.querySelector("#function").value),
   a: Number(document.querySelector("#a").value),
   b: Number(document.querySelector("#b").value),
   epsilon: Number(document.querySelector("#epsilon").value),

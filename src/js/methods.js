@@ -1,11 +1,12 @@
 function leftRectangleRuleMethod({ func, a, b, epsilon }) {
+  f = createMathFunction(func, "x");
   let n = 10;
   let sum = 0;
   let q, x;
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
-    sum += mathFunction(func, x);
+    sum += f(x);
   }
   sum *= h;
   do {
@@ -15,7 +16,7 @@ function leftRectangleRuleMethod({ func, a, b, epsilon }) {
     sum = 0;
     for (let i = 0; i < n; i++) {
       x = a + i * h;
-      sum += mathFunction(func, x);
+      sum += f(x);
     }
     sum *= h;
   } while (Math.abs(sum - q) > epsilon);
@@ -23,13 +24,14 @@ function leftRectangleRuleMethod({ func, a, b, epsilon }) {
 }
 
 function rightRectangleRuleMethod({ func, a, b, epsilon }) {
+  let f = createMathFunction(func, "x");
   let n = 10;
   let sum = 0;
   let q, x;
   let h = (b - a) / n;
   for (let i = 1; i <= n; i++) {
     x = a + i * h;
-    sum += mathFunction(func, x);
+    sum += f(x);
   }
   sum *= h;
   do {
@@ -39,7 +41,7 @@ function rightRectangleRuleMethod({ func, a, b, epsilon }) {
     sum = 0;
     for (let i = 1; i <= n; i++) {
       x = a + i * h;
-      sum += mathFunction(func, x);
+      sum += f(x);
     }
     sum *= h;
   } while (Math.abs(sum - q) > epsilon);
@@ -47,23 +49,24 @@ function rightRectangleRuleMethod({ func, a, b, epsilon }) {
 }
 
 function trapezoidolRuleMethod({ func, a, b, epsilon }) {
+  const f = createMathFunction(func, "x");
   let n = 10;
-  let p = (mathFunction(func, a) + mathFunction(func, b)) / 2,
+  let p = (f(a) + f(b)) / 2,
     q;
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
-    p += mathFunction(func, x);
+    p += f(x);
   }
   p *= h;
   do {
     q = p;
     n *= 2;
     h = (b - a) / n;
-    p = (mathFunction(func, a) + mathFunction(func, b)) / 2;
+    p = (f(a) + f(b)) / 2;
     for (let i = 0; i < n; i++) {
       x = a + i * h;
-      p += mathFunction(func, x);
+      p += f(x);
     }
     p *= h;
   } while (Math.abs(p - q) > epsilon);
@@ -71,34 +74,30 @@ function trapezoidolRuleMethod({ func, a, b, epsilon }) {
 }
 
 function simpson13RuleMethod({ func, a, b, epsilon }) {
-  let n = 10,
-    p = 0,
+  const f = createMathFunction(func, "x");
+  let n = 10;
+  let p = 0,
     q;
   let h = (b - a) / n;
 
   for (let i = 0; i < n; i += 2) {
-    p +=
-      (h / 3) *
-      (mathFunction(func, a + i * h) +
-        4 * mathFunction(func, a + (i + 1) * h) +
-        mathFunction(func, a + (i + 2) * h));
+    p += (h / 3) * (f(a + i * h) + 4 * f(a + (i + 1) * h) + f(a + (i + 2) * h));
   }
   do {
     q = p;
     n *= 2;
+    let h = (b - a) / n;
     p = 0;
     for (let i = 0; i < n; i += 2) {
       p +=
-        (h / 3) *
-        (mathFunction(func, a + i * h) +
-          4 * mathFunction(func, a + (i + 1) * h) +
-          mathFunction(func, a + (i + 2) * h));
+        (h / 3) * (f(a + i * h) + 4 * f(a + (i + 1) * h) + f(a + (i + 2) * h));
     }
   } while (Math.abs(p - q) > epsilon);
   return p;
 }
 
 function simpson38RuleMethod({ func, a, b, epsilon }) {
+  const f = createMathFunction(func, "x");
   let n = 15,
     p = 0,
     q;
@@ -108,10 +107,10 @@ function simpson38RuleMethod({ func, a, b, epsilon }) {
     p +=
       (3 / 8) *
       h *
-      (mathFunction(func, a + i * h) +
-        3 * mathFunction(func, a + (i + 1) * h) +
-        3 * mathFunction(func, a + (i + 2) * h) +
-        mathFunction(func, a + (i + 3) * h));
+      (f(a + i * h) +
+        3 * f(a + (i + 1) * h) +
+        3 * f(a + (i + 2) * h) +
+        f(a + (i + 3) * h));
   }
   do {
     q = p;
@@ -122,16 +121,17 @@ function simpson38RuleMethod({ func, a, b, epsilon }) {
       p +=
         (3 / 8) *
         h *
-        (mathFunction(func, a + i * h) +
-          3 * mathFunction(func, a + (i + 1) * h) +
-          3 * mathFunction(func, a + (i + 2) * h) +
-          mathFunction(func, a + (i + 3) * h));
+        (f(a + i * h) +
+          3 * f(a + (i + 1) * h) +
+          3 * f(a + (i + 2) * h) +
+          f(a + (i + 3) * h));
     }
   } while (Math.abs(p - q) > epsilon);
   return p;
 }
 
 function GaussQuadratureMethod({ func, a, b }) {
+  const f = createMathFunction(func, "x");
   const W = [
     0.0271524594117540948517806, 0.0622535239386478928628438,
     0.0951585116824927848099251, 0.1246289712555338720524763,
@@ -156,9 +156,7 @@ function GaussQuadratureMethod({ func, a, b }) {
   let p = 0;
   for (let i = 0; i < W.length; i++) {
     p +=
-      W[i] *
-      (((b - a) / 2) *
-        mathFunction(func, a * ((1 - T[i]) / 2) + b * ((1 + T[i]) / 2)));
+      W[i] * (((b - a) / 2) * f(a * ((1 - T[i]) / 2) + b * ((1 + T[i]) / 2)));
   }
   return p;
 }
