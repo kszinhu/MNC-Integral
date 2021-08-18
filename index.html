@@ -47,16 +47,19 @@
             <input type="number" id="epsilon" placeholder="Erro Máximo" style="width: 100%;" />
           </div>
           <!-- Calculation Buttons -->
-          <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin-bottom: 1em;">
+          <div class="buttons" style="display: inline-flex; width: 100%; align-items: center; margin: 0 0.5em 1em 0.5em;">
             <!-- Info Button -->
-            <button class="btn button" id="button-info" onclick="infoButton()"><i
+            <button class="btn" id="button-info" onclick="infoButton()"><i
                 class="fas fa-info-circle"></i></button>
             <a href="https://pt.wikipedia.org/wiki/Integral" target="__blank">
               <button class="btn button" id="button-docs" style="margin-right: 1em;"><i
                   class="fas fa-file-alt"></i></button>
             </a>
             <!-- Clear all inputs Button -->
-            <button class="btn button" id="button-clear" onclick="clearInputs()"><i class="fas fa-trash"></i></button>
+            <button class="btn" id="button-clear" onclick="clearInputs()"><i class="fas fa-trash"></i></button>
+            <!-- Calculate Button -->
+            <button class="btn" id="button-calculate" style="width: 100%" onclick="calculate()">
+              <i class="fas fa-calculator"></i> Calcular </button>
           </div>
 
           <!-- Toggle checked Methods -->
