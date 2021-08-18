@@ -68,31 +68,37 @@ const selectAll = () =>
  */
 const genChart = (info) => {
   const chartDiv = document.querySelector("#chart-div");
+  const containerDiv = document.querySelector("#container-chart");
   const chartCanvas = document.createElement("canvas");
   chartCanvas.id = "chart";
   chartDiv.innerHTML = "";
   chartDiv.appendChild(chartCanvas);
-  chartDiv.style.display = "block";
+  containerDiv.style.display = "block";
+
+  const labels = [].range(info.a, info.b, 0.25);
 
   const data = {
-    labels: info.x,
+    labels: labels,
     datasets: [
       {
-        type: "scatter",
-        label: "Pontos da Amostra",
-        backgroundColor: "#D12A2A",
-        borderColor: "#B01717",
-        borderWidth: 3,
-        data: info.sample,
+        type: "line",
+        label: `F(x) = ${info.func}`,
+        borderColor: "#222229",
+        backgroundColor: "#222229",
+        cubicInterpolationMode: "monotone",
+        borderWidth: 2,
+        radius: 0,
+        data: mathFunction(info.func, labels),
       },
       {
         type: "line",
-        label: `P${info.degree}(x)`,
-        borderColor: "#2196F3",
-        backgroundColor: "#2196F3",
-        borderWidth: 2,
+        label: "Area",
+        backgroundColor: "rgba(33,150,243,0.4)",
         cubicInterpolationMode: "monotone",
-        data: info.polynomial,
+        fill: true,
+        borderWidth: 1,
+        radius: 0,
+        data: mathFunction(info.func, labels),
       },
     ],
   };
@@ -108,7 +114,18 @@ const genChart = (info) => {
       plugins: {
         title: {
           display: true,
-          text: "Adjustment chart",
+          text: "Gráfico da Função",
+        },
+        tooltip: {
+          enabled: true,
+          filter: function (tooltipItem) {
+            var dSet = tooltipItem.datasetIndex;
+            if (dSet == 1) {
+              return false;
+            } else {
+              return true;
+            }
+          },
         },
       },
       interaction: {
@@ -123,7 +140,7 @@ const genChart = (info) => {
     },
   };
 
-  new Chart(chartCanvas, config);
+  new Chart(chartCanvas, config,);
 };
 
 /**

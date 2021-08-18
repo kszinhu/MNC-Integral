@@ -61,10 +61,24 @@ ul {
 
 .chart {
   display: none;
+  position: relative;
   margin: 0 0 1em 0;
   padding: 1em;
   border-radius: 10px;
   background-color: #eee;
+  overflow-x: scroll;
+  & > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  & > div {
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 .result {
