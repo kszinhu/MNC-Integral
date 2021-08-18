@@ -71,3 +71,11 @@ function trapezoidolRuleMethod(f, a, b, error) {
   } while (Math.abs(p - q) > error);
   return p;
 }
+
+function GaussQuadratureMethod(f, a, b) {
+  let p = 0;
+  for (let i = 0; i < 20; i++) {
+    p += w[i] * (((b - a) / 2) * mathFunction(f, a * ((1 - X[i]) / 2) + b * ((1 + X[i]) / 2)));
+  }
+  return p;
+}
