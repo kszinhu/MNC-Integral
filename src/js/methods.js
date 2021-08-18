@@ -72,6 +72,26 @@ function trapezoidolRuleMethod(f, a, b, error) {
   return p;
 }
 
+function simpson13RuleMethod(f, a, b, erro) {
+  let n = 10;
+  let p = 0;
+  let q;
+  let h = (b-a)/n;
+
+  for (let i = 0; i < n; i += 2) {
+    p += (h/3)*(mathFunction(f,a+i*h) + 4*mathFunction(f,a+(i+1)*h) + mathFunction(f,a+(i+2)*h));
+  }
+  do {
+      q = p;
+      n *= 2;
+      p = 0;
+      for (let i = 0; i < n; i += 2) { 
+        p += (h/3)*(mathFunction(f,a+i*h) + 4*mathFunction(f,a+(i+1)*h) + mathFunction(f,a+(i+2)*h));
+      }
+  } while (Math.abs(p - q) > erro);
+  return p;
+}
+
 function GaussQuadratureMethod(f, a, b) {
   let p = 0;
   for (let i = 0; i < 20; i++) {
