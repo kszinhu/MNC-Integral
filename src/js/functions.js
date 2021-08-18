@@ -44,7 +44,9 @@ const infoButton = () => {
  * @param { x } array of x points.
  */
 const mathFunction = (input, x) => {
-  return x.map((el) => math.evaluate(input, { x: el }));
+  return Array.isArray(x)
+    ? x.map((el) => math.evaluate(input, { x: el }))
+    : math.evaluate(input, { x });
 };
 
 /**
@@ -172,37 +174,55 @@ const whichSelected = () => {
         case 1:
           // Retângulos à esquerda
           // ------------------------
-          result.leftRectangles = {methodName: 'Retângulos à esquerda', value: leftRectangleRuleMethod(getInput())}
+          result.leftRectangles = {
+            methodName: "Retângulos à esquerda",
+            value: leftRectangleRuleMethod(getInput()),
+          };
           break;
 
         case 2:
           // Retângulos à direita
           // ------------------------
-          result.rightRectangles = {methodName: 'Retângulos à direita', value: rightRectangleRuleMethod(getInput())}
+          result.rightRectangles = {
+            methodName: "Retângulos à direita",
+            value: rightRectangleRuleMethod(getInput()),
+          };
           break;
 
         case 3:
           // Regra dos Trapézios
           // ------------------------
-          result.trapezoids = {methodName: 'Regra dos Trapézios', value: trapezoidolRuleMethod(getInput())}
+          result.trapezoids = {
+            methodName: "Regra dos Trapézios",
+            value: trapezoidolRuleMethod(getInput()),
+          };
           break;
 
         case 4:
           // Regra 1/3 de Simpson
           // ------------------------
-          result.simpson13 = {methodName: 'Regra 1/3 de Simpson', value: simpson13RuleMethod(getInput())}
+          result.simpson13 = {
+            methodName: "Regra 1/3 de Simpson",
+            value: simpson13RuleMethod(getInput()),
+          };
           break;
 
         case 5:
           // Regra 3/8 de Simpson
           // ------------------------
-          result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: simpson38RuleMethod(getInput())}
+          result.simpson38 = {
+            methodName: "Regra 3/8 de Simpson",
+            value: simpson38RuleMethod(getInput()),
+          };
           break;
 
         case 6:
           // Quadratura de Gauss
           // ------------------------
-          result.quadrature = {methodName: 'Quadratura de Gauss', value: GaussQuadratureMethod(getInput())}
+          result.quadrature = {
+            methodName: "Quadratura de Gauss",
+            value: GaussQuadratureMethod(getInput()),
+          };
           break;
       }
     });

@@ -5,7 +5,7 @@ function leftRectangleRuleMethod({ func, a, b, epsilon }) {
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
-    sum += mathFunction(func, [x])[0];
+    sum += mathFunction(func, x);
   }
   sum *= h;
   do {
@@ -15,7 +15,7 @@ function leftRectangleRuleMethod({ func, a, b, epsilon }) {
     sum = 0;
     for (let i = 0; i < n; i++) {
       x = a + i * h;
-      sum += mathFunction(func, [x])[0];
+      sum += mathFunction(func, x);
     }
     sum *= h;
   } while (Math.abs(sum - q) > epsilon);
@@ -29,7 +29,7 @@ function rightRectangleRuleMethod({ func, a, b, epsilon }) {
   let h = (b - a) / n;
   for (let i = 1; i <= n; i++) {
     x = a + i * h;
-    sum += mathFunction(func, [x])[0];
+    sum += mathFunction(func, x);
   }
   sum *= h;
   do {
@@ -39,7 +39,7 @@ function rightRectangleRuleMethod({ func, a, b, epsilon }) {
     sum = 0;
     for (let i = 1; i <= n; i++) {
       x = a + i * h;
-      sum += mathFunction(func, [x])[0];
+      sum += mathFunction(func, x);
     }
     sum *= h;
   } while (Math.abs(sum - q) > epsilon);
@@ -48,22 +48,22 @@ function rightRectangleRuleMethod({ func, a, b, epsilon }) {
 
 function trapezoidolRuleMethod({ func, a, b, epsilon }) {
   let n = 10;
-  let p = (mathFunction(func, [a])[0] + mathFunction(func, [b])[0]) / 2,
+  let p = (mathFunction(func, a) + mathFunction(func, b)) / 2,
     q;
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
-    p += mathFunction(func, [x])[0];
+    p += mathFunction(func, x);
   }
   p *= h;
   do {
     q = p;
     n *= 2;
     h = (b - a) / n;
-    p = (mathFunction(func, [a])[0] + mathFunction(func, [b])[0]) / 2;
+    p = (mathFunction(func, a) + mathFunction(func, b)) / 2;
     for (let i = 0; i < n; i++) {
       x = a + i * h;
-      p += mathFunction(func, [x])[0];
+      p += mathFunction(func, x);
     }
     p *= h;
   } while (Math.abs(p - q) > epsilon);
@@ -79,9 +79,9 @@ function simpson13RuleMethod({ func, a, b, epsilon }) {
   for (let i = 0; i < n; i += 2) {
     p +=
       (h / 3) *
-      (mathFunction(func, [a + i * h])[0] +
-        4 * mathFunction(func, [a + (i + 1) * h])[0] +
-        mathFunction(func, [a + (i + 2) * h])[0]);
+      (mathFunction(func, a + i * h) +
+        4 * mathFunction(func, a + (i + 1) * h) +
+        mathFunction(func, a + (i + 2) * h));
   }
   do {
     q = p;
@@ -90,9 +90,9 @@ function simpson13RuleMethod({ func, a, b, epsilon }) {
     for (let i = 0; i < n; i += 2) {
       p +=
         (h / 3) *
-        (mathFunction(func, [a + i * h])[0] +
-          4 * mathFunction(func, [a + (i + 1) * h])[0] +
-          mathFunction(func, [a + (i + 2) * h])[0]);
+        (mathFunction(func, a + i * h) +
+          4 * mathFunction(func, a + (i + 1) * h) +
+          mathFunction(func, a + (i + 2) * h));
     }
   } while (Math.abs(p - q) > epsilon);
   return p;
@@ -108,10 +108,10 @@ function simpson38RuleMethod({ func, a, b, epsilon }) {
     p +=
       (3 / 8) *
       h *
-      (mathFunction(func, [a + i * h])[0] +
-        3 * mathFunction(func, [a + (i + 1) * h])[0] +
-        3 * mathFunction(func, [a + (i + 2) * h])[0] +
-        mathFunction(func, [a + (i + 3) * h])[0]);
+      (mathFunction(func, a + i * h) +
+        3 * mathFunction(func, a + (i + 1) * h) +
+        3 * mathFunction(func, a + (i + 2) * h) +
+        mathFunction(func, a + (i + 3) * h));
   }
   do {
     q = p;
@@ -122,10 +122,10 @@ function simpson38RuleMethod({ func, a, b, epsilon }) {
       p +=
         (3 / 8) *
         h *
-        (mathFunction(func, [a + i * h])[0] +
-          3 * mathFunction(func, [a + (i + 1) * h])[0] +
-          3 * mathFunction(func, [a + (i + 2) * h])[0] +
-          mathFunction(func, [a + (i + 3) * h])[0]);
+        (mathFunction(func, a + i * h) +
+          3 * mathFunction(func, a + (i + 1) * h) +
+          3 * mathFunction(func, a + (i + 2) * h) +
+          mathFunction(func, a + (i + 3) * h));
     }
   } while (Math.abs(p - q) > epsilon);
   return p;
@@ -158,7 +158,7 @@ function GaussQuadratureMethod({ func, a, b }) {
     p +=
       W[i] *
       (((b - a) / 2) *
-        mathFunction(func, [a * ((1 - T[i]) / 2) + b * ((1 + T[i]) / 2)])[0]);
+        mathFunction(func, a * ((1 - T[i]) / 2) + b * ((1 + T[i]) / 2)));
   }
   return p;
 }
