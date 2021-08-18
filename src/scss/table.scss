@@ -1,0 +1,39 @@
+#result-div {
+  padding: 0.5em;
+  .result-table {
+    color: black;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0 0.2em;
+    & thead {
+      color: white;
+      & th {
+        padding: 0.5em;
+        background-color: #0099ff;
+        &:first-child {
+          border-radius: 0.5em 0 0 0.5em;
+        }
+        &:last-child {
+          border-radius: 0 0.5em 0.5em 0;
+        }
+      }
+    }
+    & tbody {
+      & tr {
+        margin: 5px;
+        &:not(:last-child) {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+        }
+        > td {
+          padding: 5px 15px;
+          &:first-child {
+            font-weight: bold;
+          }
+          &:last-child {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

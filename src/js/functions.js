@@ -141,7 +141,7 @@ const getInput = () => ({
  * Função encaminha a chamada dos métodos conforme a seleção do Usuário.
  * @returns { Object } Object with the results of the integrals obtained by the methods.
  */
-const WhichSelected = () => {
+const whichSelected = () => {
   const result = {};
   const onlySelects = [...document.querySelectorAll(".toggle-control input")]
     .map((el) => el.checked && Number(el.value))
@@ -153,39 +153,75 @@ const WhichSelected = () => {
         case 1:
           // Retângulos à esquerda
           // ------------------------
-          // result.leftRectangles = methodHere()
+          // result.leftRectangles = {methodName: 'Retângulos à esquerda', value: methodHere()}
           break;
 
         case 2:
           // Retângulos à direita
           // ------------------------
-          // result.rightRectangles = methodHere()
+          // result.rightRectangles = {methodName: 'Retângulos à direita', value: methodHere()}
           break;
 
         case 3:
           // Regra dos Trapézios
           // ------------------------
-          // result.trapezoids = methodHere()
+          // result.trapezoids = {methodName: 'Regra dos Trapézios', value: methodHere()}
           break;
 
         case 4:
           // Regra 1/3 de Simpson
           // ------------------------
-          // result.simpson13 = methodHere()
+          // result.simpson13 = {methodName: 'Regra 1/3 de Simpson', value: methodHere()}
           break;
 
         case 5:
           // Regra 3/8 de Simpson
           // ------------------------
-          // result.simpson38 = methodHere()
+          // result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: methodHere()}
           break;
 
         case 6:
           // Quadratura de Gauss
           // ------------------------
-          // result.quadrature = methodHere();
+          // result.quadrature = {methodName: 'Quadratura de Gauss', value: methodHere()}
           break;
       }
     });
   return result;
+};
+
+/**
+ * Função que possibilita a visualizaçào na aplicação.
+ * @params { Object } Object with the results of the integrals obtained by the methods.
+ */
+const showResult = (objectResult) => {
+  const resultDiv = document.querySelector("#result-div");
+  resultDiv.innerHTML = "";
+  let content = "";
+
+  /*
+   * Creates table contents, from the results object.
+   */
+  Object.entries(objectResult).forEach(([key, value]) => {
+    content += `<tr>
+            <td>${value.methodName}</td>
+            <td>${value.value}</td>
+          </tr>`;
+  });
+
+  const resultTable = document.createElement("table");
+  resultTable.className = "result-table";
+  resultTable.innerHTML = `
+    <thead>
+      <tr>
+        <th>Método</th>
+        <th>Resultado</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${content}
+    </tbody>
+  `;
+  resultDiv.appendChild(resultTable);
+  resultDiv.style.display = "block";
 };
