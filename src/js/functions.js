@@ -192,7 +192,7 @@ const whichSelected = () => {
 
 /**
  * Função que possibilita a visualizaçào na aplicação.
- * @params { Object } Object with the results of the integrals obtained by the methods.
+ * @param { Object } Object with the results of the integrals obtained by the methods.
  */
 const showResult = (objectResult) => {
   const resultDiv = document.querySelector("#result-div");
