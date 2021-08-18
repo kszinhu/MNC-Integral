@@ -1,8 +1,7 @@
 function leftRectangleRuleMethod(f, a, b, error) {
   let n = 10;
   let sum = 0;
-  let q;
-  let x;
+  let q, x;
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
@@ -26,8 +25,7 @@ function leftRectangleRuleMethod(f, a, b, error) {
 function rightRectangleRuleMethod(f, a, b, error) {
   let n = 10;
   let sum = 0;
-  let q;
-  let x;
+  let q, x;
   let h = (b - a) / n;
   for (let i = 1; i <= n; i++) {
     x = a + i * h;
@@ -50,8 +48,7 @@ function rightRectangleRuleMethod(f, a, b, error) {
 
 function trapezoidolRuleMethod(f, a, b, error) {
   let n = 10;
-  let p = (mathFunction(f, a) + mathFunction(f, b)) / 2,
-    q;
+  let p = (mathFunction(f, a) + mathFunction(f, b)) / 2, q;
   let h = (b - a) / n;
   for (let i = 0; i < n; i++) {
     x = a + i * h;
@@ -68,6 +65,43 @@ function trapezoidolRuleMethod(f, a, b, error) {
       p += mathFunction(f, x);
     }
     p *= h;
+  } while (Math.abs(p - q) > error);
+  return p;
+}
+
+function simpson13RuleMethod(f, a, b, erro) {
+  let n = 10, p = 0, q;
+  let h = (b-a)/n;
+
+  for (let i = 0; i < n; i += 2) {
+    p += (h/3)*(mathFunction(f,a+i*h) + 4*mathFunction(f,a+(i+1)*h) + mathFunction(f,a+(i+2)*h));
+  }
+  do {
+      q = p;
+      n *= 2;
+      p = 0;
+      for (let i = 0; i < n; i += 2) { 
+        p += (h/3)*(mathFunction(f,a+i*h) + 4*mathFunction(f,a+(i+1)*h) + mathFunction(f,a+(i+2)*h));
+      }
+  } while (Math.abs(p - q) > erro);
+  return p;
+}
+
+function simpson38RuleMethod(f, a, b, error) {
+  let n = 15, p = 0, q;
+  let h = (b - a) / n;
+
+  for (let i = 0; i < n; i += 3) {
+    p += (3 / 8) * h * (mathFunction(f,a + i * h) + 3 * mathFunction(f,a + (i + 1) * h) + 3 * mathFunction(f,a + (i + 2) * h) + mathFunction(f,a + (i + 3) * h));
+  }
+  do {
+    q = p;
+    n *= 3;
+    let h = (b - a) / n;
+    p = 0;
+    for (let i = 0; i < n; i += 3) {
+      p += (3 / 8) * h * (mathFunction(f,a + i * h) + 3 * mathFunction(f,a + (i + 1) * h) + 3 * mathFunction(f,a + (i + 2) * h) + mathFunction(f,a + (i + 3) * h));
+    }
   } while (Math.abs(p - q) > error);
   return p;
 }

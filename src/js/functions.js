@@ -170,37 +170,37 @@ const whichSelected = () => {
         case 1:
           // Retângulos à esquerda
           // ------------------------
-          // result.leftRectangles = {methodName: 'Retângulos à esquerda', value: methodHere()}
+          // result.leftRectangles = {methodName: 'Retângulos à esquerda', value: leftRectangleRuleMethod()}
           break;
 
         case 2:
           // Retângulos à direita
           // ------------------------
-          // result.rightRectangles = {methodName: 'Retângulos à direita', value: methodHere()}
+          // result.rightRectangles = {methodName: 'Retângulos à direita', value: rightRectangleRuleMethod()}
           break;
 
         case 3:
           // Regra dos Trapézios
           // ------------------------
-          // result.trapezoids = {methodName: 'Regra dos Trapézios', value: methodHere()}
+          // result.trapezoids = {methodName: 'Regra dos Trapézios', value: trapezoidolRuleMethod()}
           break;
 
         case 4:
           // Regra 1/3 de Simpson
           // ------------------------
-          // result.simpson13 = {methodName: 'Regra 1/3 de Simpson', value: methodHere()}
+          // result.simpson13 = {methodName: 'Regra 1/3 de Simpson', value: simpson13RuleMethod()}
           break;
 
         case 5:
           // Regra 3/8 de Simpson
           // ------------------------
-          // result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: methodHere()}
+          // result.simpson38 = {methodName: 'Regra 3/8 de Simpson', value: simpson38RuleMethod()}
           break;
 
         case 6:
           // Quadratura de Gauss
           // ------------------------
-          // result.quadrature = {methodName: 'Quadratura de Gauss', value: methodHere()}
+          // result.quadrature = {methodName: 'Quadratura de Gauss', value: GaussQuadratureMethod()}
           break;
       }
     });
