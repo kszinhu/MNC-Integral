@@ -24,6 +24,32 @@ function leftRectangleRuleMethod(f, a, b, error) {
   return sum;
 }
 
+function rightRectangleRuleMethod(f, a, b, error) {
+  f = new Function(`x`, `return ${f};`);
+  let n = 10;
+  let sum = 0;
+  let q;
+  let x;
+  let h = (b - a) / n;
+  for (let i = 1; i <= n; i++) {
+    x = a + i * h;
+    sum += f(x);
+  }
+  sum *= h;
+  do {
+    q = sum;
+    n *= 2;
+    h = (b - a) / n;
+    sum = 0;
+    for (let i = 1; i <= n; i++) {
+      x = a + i * h;
+      sum += f(x);
+    }
+    sum *= h;
+  } while (Math.abs(sum - q) > error);
+  return sum;
+}
+
 function trapezoidolRuleMethod(f, a, b, error) {
   f = new Function(`x`, `return ${f};`);
   let n = 10;
