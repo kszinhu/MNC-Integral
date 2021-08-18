@@ -1,5 +1,5 @@
 function leftRectangleRuleMethod(f, a, b, error) {
-  f = new Function(`x`, `return ${f};`);
+  func = new Function(`x`, `return ${f};`);
   let n = 10;
   let sum = 0;
   let q;
@@ -25,7 +25,7 @@ function leftRectangleRuleMethod(f, a, b, error) {
 }
 
 function rightRectangleRuleMethod(f, a, b, error) {
-  f = new Function(`x`, `return ${f};`);
+  func = new Function(`x`, `return ${f};`);
   let n = 10;
   let sum = 0;
   let q;
@@ -51,7 +51,7 @@ function rightRectangleRuleMethod(f, a, b, error) {
 }
 
 function trapezoidolRuleMethod(f, a, b, error) {
-  f = new Function(`x`, `return ${f};`);
+  func = new Function(`x`, `return ${f};`);
   let n = 10;
   let p = (f(a) + f(b)) / 2, q;
   let h = (b - a) / n;
@@ -73,4 +73,5 @@ function trapezoidolRuleMethod(f, a, b, error) {
   } while (Math.abs(p - q) > error);
   return p;
 }
+
 
