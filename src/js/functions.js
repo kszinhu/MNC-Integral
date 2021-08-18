@@ -66,7 +66,7 @@ const selectAll = () =>
  * Function that generates graphs.
  * @param { info } object of the chart data.
  */
-const genChart = (info) => {
+const genChart = ({ func, a, b }) => {
   const chartDiv = document.querySelector("#chart-div");
   const containerDiv = document.querySelector("#container-chart");
   const chartCanvas = document.createElement("canvas");
@@ -75,20 +75,22 @@ const genChart = (info) => {
   chartDiv.appendChild(chartCanvas);
   containerDiv.style.display = "block";
 
-  const labels = [].range(info.a, info.b, 0.25);
+  if (!func || !a || !b) return;
+
+  const labels = [].range(a, b, 0.25);
 
   const data = {
     labels: labels,
     datasets: [
       {
         type: "line",
-        label: `F(x) = ${info.func}`,
+        label: `F(x) = ${func}`,
         borderColor: "#222229",
         backgroundColor: "#222229",
         cubicInterpolationMode: "monotone",
         borderWidth: 2,
         radius: 0,
-        data: mathFunction(info.func, labels),
+        data: mathFunction(func, labels),
       },
       {
         type: "line",
@@ -98,7 +100,7 @@ const genChart = (info) => {
         fill: true,
         borderWidth: 1,
         radius: 0,
-        data: mathFunction(info.func, labels),
+        data: mathFunction(func, labels),
       },
     ],
   };
@@ -140,7 +142,7 @@ const genChart = (info) => {
     },
   };
 
-  new Chart(chartCanvas, config,);
+  new Chart(chartCanvas, config);
 };
 
 /**
@@ -148,7 +150,7 @@ const genChart = (info) => {
  * @return { object } Object with input data.
  */
 const getInput = () => ({
-  func: document.querySelector("#function").value,
+  func: document.querySelector("#function").value.toLowerCase(),
   a: Number(document.querySelector("#a").value),
   b: Number(document.querySelector("#b").value),
   epsilon: Number(document.querySelector("#epsilon").value),
