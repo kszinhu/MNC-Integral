@@ -5,7 +5,7 @@
 
 ---
 
-## Métodos / Regras
+## Métodos
 
 1. Retângulos à Esquerda
 2. Retângulos à Direita
@@ -13,8 +13,8 @@
 4. 1/3 de Simpson
 5. 3/8 de Simpson
 6. Quadratura de Gauss
-7. Gráfico da função
-8. Mais informações / Link para mais informações sobre os métodos utilizados no programa
+
++ Possível gerar o gráfico da função
 
 ### Como usar
 
