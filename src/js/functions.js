@@ -90,84 +90,86 @@ const selectAll = () =>
  * @param { info } object of the chart data.
  */
 const genChart = ({ func, func_original, a, b }) => {
-  const chartDiv = document.querySelector("#chart-div");
-  const containerDiv = document.querySelector("#container-chart");
-  const chartCanvas = document.createElement("canvas");
-  chartCanvas.id = "chart";
-  chartDiv.innerHTML = "";
-  chartDiv.appendChild(chartCanvas);
-  containerDiv.style.display = "block";
+  if (func || a || b) {
+    const chartDiv = document.querySelector("#chart-div");
+    const containerDiv = document.querySelector("#container-chart");
+    const chartCanvas = document.createElement("canvas");
+    chartCanvas.id = "chart";
+    chartDiv.innerHTML = "";
+    chartDiv.appendChild(chartCanvas);
+    containerDiv.style.display = "block";
 
-  if (!func || !a || !b) return;
+    const labels = [].range(a, b, 0.25);
+    const f = createMathFunction(func, "x");
+    const data_result = labels.map((x) => f(x));
 
-  const labels = [].range(a, b, 0.25);
-  const f = createMathFunction(func, "x");
-  const data_result = labels.map((x) => f(x));
-
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        type: "line",
-        label: `F(x) = ${func_original}`,
-        borderColor: "#222229",
-        backgroundColor: "#222229",
-        cubicInterpolationMode: "monotone",
-        borderWidth: 2,
-        radius: 0,
-        data: data_result,
-      },
-      {
-        type: "line",
-        label: "Area",
-        backgroundColor: "rgba(33,150,243,0.4)",
-        cubicInterpolationMode: "monotone",
-        fill: true,
-        borderWidth: 1,
-        radius: 0,
-        data: data_result,
-      },
-    ],
-  };
-
-  const config = {
-    type: "line",
-    data: data,
-    options: {
-      responsive: true,
-      legend: {
-        position: "top",
-      },
-      plugins: {
-        title: {
-          display: true,
-          text: "Gráfico da Função",
+    const data = {
+      labels: labels,
+      datasets: [
+        {
+          type: "line",
+          label: `F(x) = ${func_original}`,
+          borderColor: "#222229",
+          backgroundColor: "#222229",
+          cubicInterpolationMode: "monotone",
+          borderWidth: 2,
+          radius: 0,
+          data: data_result,
         },
-        tooltip: {
-          enabled: true,
-          filter: function (tooltipItem) {
-            var dSet = tooltipItem.datasetIndex;
-            if (dSet == 1) {
-              return false;
-            } else {
-              return true;
-            }
+        {
+          type: "line",
+          label: "Area",
+          backgroundColor: "rgba(33,150,243,0.4)",
+          cubicInterpolationMode: "monotone",
+          fill: true,
+          borderWidth: 1,
+          radius: 0,
+          data: data_result,
+        },
+      ],
+    };
+
+    const config = {
+      type: "line",
+      data: data,
+      options: {
+        responsive: true,
+        legend: {
+          position: "top",
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: "Gráfico da Função",
+          },
+          tooltip: {
+            enabled: true,
+            filter: function (tooltipItem) {
+              var dSet = tooltipItem.datasetIndex;
+              if (dSet == 1) {
+                return false;
+              } else {
+                return true;
+              }
+            },
+          },
+        },
+        interaction: {
+          mode: "index",
+          intersect: false,
+        },
+        scale: {
+          ticks: {
+            beginAtZero: true,
           },
         },
       },
-      interaction: {
-        mode: "index",
-        intersect: false,
-      },
-      scale: {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    },
-  };
+    };
 
-  new Chart(chartCanvas, config);
+    new Chart(chartCanvas, config);
+    return;
+  }
+  alert("Entradas inválidas");
 };
 
 /**
@@ -268,7 +270,11 @@ const showResult = (objectResult) => {
   Object.entries(objectResult).forEach(([key, value]) => {
     content += `<tr>
             <td>${value.methodName}</td>
-            <td>${value.value.toFixed(9)}</td>
+            <td>${
+              typeof value.value != "string"
+                ? value.value.toFixed(9)
+                : value.value
+            }</td>
           </tr>`;
   });
 
