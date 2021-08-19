@@ -50,10 +50,13 @@ function formattingExpression(input) {
     .replace(/sen|sin/gi, "Math.sin")
     .replace(/cos/gi, "Math.cos")
     .replace(/tg|tan/gi, "Math.tan")
+    .replace(/sinh/gi, "Math.sinh")
+    .replace(/cosh/gi, "Math.cosh")
+    .replace(/tanh/gi, "Math.tanh")
     .replace(/\^/gi, "**")
     .replace(/pi/gi, "Math.PI")
-    .replace(/\log\D/gi, "log10(")
-    .replace(/\ln/gi, "log")
+    .replace(/\log\D/gi, "Math.log10(")
+    .replace(/\ln/gi, "Math.log")
     .replace(/\e/gi, "Math.E");
 }
 
