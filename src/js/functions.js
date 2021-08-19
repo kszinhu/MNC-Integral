@@ -47,9 +47,9 @@ const infoButton = (input) => {
 function formattingExpression(input) {
   return input
     .toLowerCase()
-    .replace(/sen|sin/gi, "sin")
-    .replace(/cos/gi, "cos")
-    .replace(/tg|tan/gi, "tan")
+    .replace(/sen|sin/gi, "Math.sin")
+    .replace(/cos/gi, "Math.cos")
+    .replace(/tg|tan/gi, "Math.tan")
     .replace(/\^/gi, "**")
     .replace(/pi/gi, "Math.PI")
     .replace(/\log\D/gi, "log10(")
@@ -58,7 +58,7 @@ function formattingExpression(input) {
 }
 
 /**
- * Function that calculates a mathematical function.s
+ * Function that create function evaluators.
  */
 function createMathFunction(...args) {
   const func = args.shift();
@@ -69,7 +69,9 @@ function createMathFunction(...args) {
  * Function to clear all point inputs of the points table.
  */
 const clearInputs = () => {
-  [...document.querySelectorAll(".input-menu input")].map((el) => (el.value = ""));
+  [...document.querySelectorAll(".input-menu input")].map(
+    (el) => (el.value = "")
+  );
 };
 
 /**
@@ -84,7 +86,7 @@ const selectAll = () =>
  * Function that generates graphs.
  * @param { info } object of the chart data.
  */
-const genChart = ({ func, a, b }) => {
+const genChart = ({ func, func_original, a, b }) => {
   const chartDiv = document.querySelector("#chart-div");
   const containerDiv = document.querySelector("#container-chart");
   const chartCanvas = document.createElement("canvas");
@@ -96,19 +98,21 @@ const genChart = ({ func, a, b }) => {
   if (!func || !a || !b) return;
 
   const labels = [].range(a, b, 0.25);
+  const f = createMathFunction(func, "x");
+  const data_result = labels.map((x) => f(x));
 
   const data = {
     labels: labels,
     datasets: [
       {
         type: "line",
-        label: `F(x) = ${func}`,
+        label: `F(x) = ${func_original}`,
         borderColor: "#222229",
         backgroundColor: "#222229",
         cubicInterpolationMode: "monotone",
         borderWidth: 2,
         radius: 0,
-        data: mathFunction(func, labels),
+        data: data_result,
       },
       {
         type: "line",
@@ -118,7 +122,7 @@ const genChart = ({ func, a, b }) => {
         fill: true,
         borderWidth: 1,
         radius: 0,
-        data: mathFunction(func, labels),
+        data: data_result,
       },
     ],
   };
@@ -169,6 +173,7 @@ const genChart = ({ func, a, b }) => {
  */
 const getInput = () => ({
   func: formattingExpression(document.querySelector("#function").value),
+  func_original: document.querySelector("#function").value,
   a: Number(document.querySelector("#a").value),
   b: Number(document.querySelector("#b").value),
   epsilon: Number(document.querySelector("#epsilon").value),

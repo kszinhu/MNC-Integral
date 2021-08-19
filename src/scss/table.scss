@@ -1,10 +1,9 @@
 #result-div {
   padding: 0.5em;
+  overflow: auto;
   .result-table {
     color: black;
-    width: 100%;
     border-collapse: collapse;
-    border-spacing: 0 0.2em;
     & thead {
       color: white;
       & th {
@@ -26,6 +25,7 @@
         }
         > td {
           padding: 5px 15px;
+          white-space: nowrap;
           &:first-child {
             font-weight: bold;
           }

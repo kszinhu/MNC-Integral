@@ -1,10 +1,9 @@
 #result-div {
-  padding: 0.5em; }
+  padding: 0.5em;
+  overflow: auto; }
   #result-div .result-table {
     color: black;
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0 0.2em; }
+    border-collapse: collapse; }
     #result-div .result-table thead {
       color: white; }
       #result-div .result-table thead th {
@@ -19,7 +18,8 @@
       #result-div .result-table tbody tr:not(:last-child) {
         border-bottom: 1px solid rgba(0, 0, 0, 0.24); }
       #result-div .result-table tbody tr > td {
-        padding: 5px 15px; }
+        padding: 5px 15px;
+        white-space: nowrap; }
         #result-div .result-table tbody tr > td:first-child {
           font-weight: bold; }
         #result-div .result-table tbody tr > td:last-child {
