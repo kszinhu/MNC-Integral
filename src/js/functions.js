@@ -268,7 +268,7 @@ const showResult = (objectResult) => {
   Object.entries(objectResult).forEach(([key, value]) => {
     content += `<tr>
             <td>${value.methodName}</td>
-            <td>${value.value.toPrecision(9)}</td>
+            <td>${value.value.toFixed(9)}</td>
           </tr>`;
   });
 
