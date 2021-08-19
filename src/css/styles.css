@@ -148,9 +148,10 @@ div .options-menu {
     width: unset; }
   .hahau {
     display: grid;
-    grid-template-columns: 460px 460px;
+    grid-template-columns: auto auto;
     grid-gap: 20px; }
     .hahau > div {
-      margin: 0; }
-    .hahau > .content {
+      margin: 0;
+      width: 460px; }
+    .hahau > div:first-child {
       grid-row: 1 / 3; } }
