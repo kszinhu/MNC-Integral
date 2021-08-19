@@ -5,6 +5,10 @@
 
 ---
 
+A aplicação presente neste repositório realiza suas funções apartir de métodos de integração numéricos, apresentados na disciplina de Métodos Numericos Computacionais do Curso de Ciência da Computação da UNESP - Bauru.
+
+A aplicação contém os seguintes métodos e funcionalidades:
+
 ## Métodos
 
 1. Retângulos à Esquerda
