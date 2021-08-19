@@ -142,3 +142,15 @@ div .options-menu {
     .result-content .result-span .result-label {
       font-weight: bold;
       margin-right: 0.5em; }
+
+@media (min-width: 1000px) {
+  .main {
+    width: unset; }
+  .hahau {
+    display: grid;
+    grid-template-columns: 460px 460px;
+    grid-gap: 20px; }
+    .hahau > div {
+      margin: 0; }
+    .hahau > .content {
+      grid-row: 1 / 3; } }
